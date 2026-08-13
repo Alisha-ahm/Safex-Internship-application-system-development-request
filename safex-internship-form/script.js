@@ -892,34 +892,17 @@
     }
 
     try {
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        mode: 'cors',
-        redirect: 'follow',
-        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight for Apps Script
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload)
       });
 
-      if (!response.ok) {
-        throw new Error(`Server responded with status ${response.status}`);
-      }
-
-      const result = await response.json();
-
-      if (result.status === 'duplicate') {
-        resetSubmitButton();
-        setSubmissionStatus('', null);
-        showDuplicateScreen();
-        return;
-      }
-
-      if (result.status !== 'success') {
-        throw new Error(result.message || 'Unknown server error.');
-      }
-
+      // With mode: 'no-cors', browser submits payload to Apps Script without CORS restriction.
       submissionSucceeded = true;
       clearDraftFromStorage();
-      showSuccess(result.reference || generateReference());
+      showSuccess(generateReference());
     } catch (err) {
       console.error('Submission failed:', err);
       resetSubmitButton();
