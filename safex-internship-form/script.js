@@ -894,6 +894,8 @@
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
+        mode: 'cors',
+        redirect: 'follow',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight for Apps Script
         body: JSON.stringify(payload)
       });
