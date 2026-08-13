@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafeX Internship Application Form</title>
+  <meta name="description" content="Apply for the SafeX Internship Program. Complete our multi-step application form to get started." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%230f4c81'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='%231abc9c' font-family='Arial' font-weight='bold'%3ES%3C/text%3E%3C/svg%3E" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Lightweight icon font (Font Awesome free CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ SKIP LINK (Accessibility) ============ -->
+  <a class="skip-link" href="#application-form">Skip to application form</a>
+
+  <!-- ============ SITE HEADER ============ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand" id="brand">
+        <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
+        <span class="brand-name">SafeX<span class="brand-sub">Internships</span></span>
+      </div>
+      <div class="header-meta">
+        <span class="meta-chip" title="Application deadline">
+          <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+          Deadline: <strong>September 30, 2026</strong>
+        </span>
+        <span class="meta-chip" title="Estimated completion time">
+          <i class="fa-regular fa-clock" aria-hidden="true"></i>
+          <strong>~6 minutes</strong> to complete
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" id="main-content">
+
+    <!-- ============ INTRO SECTION ============ -->
+    <section class="intro-section" aria-labelledby="intro-heading">
+      <h1 id="intro-heading">SafeX Internship Application</h1>
+      <p class="intro-text">
+        Join SafeX's internship program and kickstart your career with hands-on experience in a fast-moving
+        security-tech team. Fill out the form below &mdash; it takes about 6 minutes and you can go back and
+        edit any section before you submit.
+      </p>
+      <ul class="intro-highlights">
+        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Mentored, project-based internship</li>
+        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Remote &amp; on-site tracks available</li>
+        <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Certificate of completion for all interns</li>
+      </ul>
+    </section>
+
+    <!-- ============ APPLICATION CARD ============ -->
+    <section class="application-card" id="application-form" aria-labelledby="form-heading">
+      <h2 class="visually-hidden" id="form-heading">Internship Application Form</h2>
+
+      <!-- Restore banner (localStorage) -->
+      <div class="restore-banner" id="restoreBanner" hidden>
+        <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
+        <span>We found a previously unfinished application saved on this device.</span>
+        <div class="restore-actions">
+          <button type="button" class="btn btn-ghost btn-sm" id="dismissRestoreBtn">Dismiss</button>
+          <button type="button" class="btn btn-outline btn-sm" id="clearSavedBtn">Clear Saved Data</button>
+        </div>
+      </div>
+
+      <!-- ============ PROGRESS INDICATOR ============ -->
+      <nav class="progress-nav" aria-label="Application progress">
+        <ol class="progress-steps" id="progressSteps">
+          <li class="progress-step is-active" data-step="1">
+            <span class="step-circle" aria-hidden="true">1</span>
+            <span class="step-label">Personal</span>
+          </li>
+          <li class="progress-step" data-step="2">
+            <span class="step-circle" aria-hidden="true">2</span>
+            <span class="step-label">Interest</span>
+          </li>
+          <li class="progress-step" data-step="3">
+            <span class="step-circle" aria-hidden="true">3</span>
+            <span class="step-label">Skills</span>
+          </li>
+          <li class="progress-step" data-step="4">
+            <span class="step-circle" aria-hidden="true">4</span>
+            <span class="step-label">Review</span>
+          </li>
+        </ol>
+        <div class="progress-bar-track" role="progressbar" id="progressBar"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" aria-label="Application progress">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+        <p class="progress-text" id="progressText" aria-live="polite">Step 1 of 4 &middot; Progress: 25%</p>
+      </nav>
+
+      <!-- ============ FORM ============ -->
+      <form id="internshipForm" novalidate autocomplete="on">
+
+        <!-- Live region for step-change / global announcements -->
+        <p class="visually-hidden" id="stepAnnouncer" role="status" aria-live="polite"></p>
+
+        <!-- ===================== STEP 1: PERSONAL INFORMATION ===================== -->
+        <fieldset class="form-step is-active" data-step="1" id="step1" aria-labelledby="step1-legend">
+          <legend id="step1-legend" class="step-legend">
+            <i class="fa-solid fa-user" aria-hidden="true"></i> Personal Information
+          </legend>
+          <p class="step-description">Tell us a little about yourself.</p>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullName">Full Name <span class="required" aria-hidden="true">*</span></label>
+              <input
+                type="text" id="fullName" name="fullName"
+                aria-describedby="fullName-hint fullName-error"
+                aria-required="true" autocomplete="name" maxlength="80"
+              />
+              <span class="field-hint" id="fullName-hint">As it appears on your CV or ID.</span>
+              <span class="error-message" id="fullName-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address <span class="required" aria-hidden="true">*</span></label>
+              <input
+                type="email" id="email" name="email"
+                aria-describedby="email-hint email-error"
+                aria-required="true" autocomplete="email" maxlength="100"
+              />
+              <span class="field-hint" id="email-hint">We'll contact you at this address.</span>
+              <span class="error-message" id="email-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number <span class="required" aria-hidden="true">*</span></label>
+              <input
+                type="tel" id="phone" name="phone"
+                aria-describedby="phone-hint phone-error"
+                aria-required="true" autocomplete="tel" maxlength="20"
+              />
+              <span class="field-hint" id="phone-hint">Pakistani format, e.g. 03001234567 or +923001234567.</span>
+              <span class="error-message" id="phone-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="city">City <span class="required" aria-hidden="true">*</span></label>
+              <input
+                type="text" id="city" name="city"
+                aria-describedby="city-error"
+                aria-required="true" autocomplete="address-level2" maxlength="60"
+              />
+              <span class="error-message" id="city-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="education">Education Level <span class="required" aria-hidden="true">*</span></label>
+              <select id="education" name="education" aria-describedby="education-error" aria-required="true">
+                <option value="">Select an option&hellip;</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Diploma">Diploma</option>
+                <option value="Bachelor's">Bachelor's</option>
+                <option value="Master's">Master's</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="error-message" id="education-error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="university">University / Institution <span class="required" aria-hidden="true">*</span></label>
+              <input
+                type="text" id="university" name="university"
+                aria-describedby="university-error"
+                aria-required="true" autocomplete="organization" maxlength="120"
+              />
+              <span class="error-message" id="university-error" role="alert"></span>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- ===================== STEP 2: FIELD / DOMAIN INTEREST ===================== -->
+        <fieldset class="form-step" data-step="2" id="step2" aria-labelledby="step2-legend">
+          <legend id="step2-legend" class="step-legend">
+            <i class="fa-solid fa-diagram-project" aria-hidden="true"></i> Field &amp; Interest
+          </legend>
+          <p class="step-description">Which domain would you like to intern in?</p>
+
+          <div class="form-group">
+            <span class="group-label" id="domain-legend">Primary Domain of Interest <span class="required" aria-hidden="true">*</span></span>
+            <div class="option-cards" role="radiogroup" aria-labelledby="domain-legend" aria-describedby="domain-error" id="domainGroup">
+              <!-- Domain radio cards injected by JS-friendly static markup -->
+              <label class="option-card">
+                <input type="radio" name="domain" value="Frontend Development" />
+                <span class="option-card-text">Frontend Development</span>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="domain" value="Backend Development" />
+                <span class="option-card-text">Backend Development</span>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="domain" value="Full Stack Development" />
+                <span class="option-card-text">Full Stack Development</span>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="domain" value="UI/UX Design" />
+                <span class="option-card-text">UI/UX Design</span>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="domain" value="Mobile Development" />
+                <span class="option-card-text">Mobile Development</span>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="domain" value="Cybersecurity" />
+                <span class="option-card-text">Cybersecurity</span>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="domain" value="Data Science" />
+                <span class="option-card-text">Data Science</span>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="domain" value="Artificial Intelligence" />
+                <span class="option-card-text">Artificial Intelligence</span>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="domain" value="Digital Marketing" />
+                <span class="option-card-text">Digital Marketing</span>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="domain" value="Content Writing" />
+                <span class="option-card-text">Content Writing</span>
+              </label>
+              <label class="option-card">
+                <input type="radio" name="domain" value="Other" />
+                <span class="option-card-text">Other</span>
+              </label>
+            </div>
+            <span class="error-message" id="domain-error" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="reason">Why are you interested in this field? <span class="required" aria-hidden="true">*</span></label>
+            <textarea
+              id="reason" name="reason" rows="5" minlength="30" maxlength="500"
+              aria-describedby="reason-hint reason-error" aria-required="true"
+            ></textarea>
+            <div class="textarea-meta">
+              <span class="field-hint" id="reason-hint">Minimum 30 characters, maximum 500.</span>
+              <span class="char-counter" id="reasonCounter" aria-live="polite">0 / 500</span>
+            </div>
+            <span class="error-message" id="reason-error" role="alert"></span>
+          </div>
+        </fieldset>
+
+        <!-- ===================== STEP 3: SKILL SELF-RATING ===================== -->
+        <fieldset class="form-step" data-step="3" id="step3" aria-labelledby="step3-legend">
+          <legend id="step3-legend" class="step-legend">
+            <i class="fa-solid fa-star-half-stroke" aria-hidden="true"></i> Skill Self-Rating
+          </legend>
+          <p class="step-description">Rate your current ability from 1 (Beginner) to 5 (Expert).</p>
+
+          <div class="rating-scale-key" aria-hidden="true">
+            <span>1 Beginner</span><span>2 Basic</span><span>3 Intermediate</span><span>4 Advanced</span><span>5 Expert</span>
+          </div>
+
+          <div class="rating-groups" id="ratingGroups">
+            <!-- Each rating group is rendered identically; data-skill matches applicationData.skills keys -->
+            <div class="form-group rating-group" data-skill="html">
+              <span class="group-label" id="html-legend">HTML <span class="required" aria-hidden="true">*</span></span>
+              <div class="rating-options" role="radiogroup" aria-labelledby="html-legend" aria-describedby="html-error">
+                <label class="rating-option"><input type="radio" name="html" value="1" /><span class="rating-number">1</span></label>
+                <label class="rating-option"><input type="radio" name="html" value="2" /><span class="rating-number">2</span></label>
+                <label class="rating-option"><input type="radio" name="html" value="3" /><span class="rating-number">3</span></label>
+                <label class="rating-option"><input type="radio" name="html" value="4" /><span class="rating-number">4</span></label>
+                <label class="rating-option"><input type="radio" name="html" value="5" /><span class="rating-number">5</span></label>
+              </div>
+              <span class="error-message" id="html-error" role="alert"></span>
+            </div>
+
+            <div class="form-group rating-group" data-skill="css">
+              <span class="group-label" id="css-legend">CSS <span class="required" aria-hidden="true">*</span></span>
+              <div class="rating-options" role="radiogroup" aria-labelledby="css-legend" aria-describedby="css-error">
+                <label class="rating-option"><input type="radio" name="css" value="1" /><span class="rating-number">1</span></label>
+                <label class="rating-option"><input type="radio" name="css" value="2" /><span class="rating-number">2</span></label>
+                <label class="rating-option"><input type="radio" name="css" value="3" /><span class="rating-number">3</span></label>
+                <label class="rating-option"><input type="radio" name="css" value="4" /><span class="rating-number">4</span></label>
+                <label class="rating-option"><input type="radio" name="css" value="5" /><span class="rating-number">5</span></label>
+              </div>
+              <span class="error-message" id="css-error" role="alert"></span>
+            </div>
+
+            <div class="form-group rating-group" data-skill="javascript">
+              <span class="group-label" id="javascript-legend">JavaScript <span class="required" aria-hidden="true">*</span></span>
+              <div class="rating-options" role="radiogroup" aria-labelledby="javascript-legend" aria-describedby="javascript-error">
+                <label class="rating-option"><input type="radio" name="javascript" value="1" /><span class="rating-number">1</span></label>
+                <label class="rating-option"><input type="radio" name="javascript" value="2" /><span class="rating-number">2</span></label>
+                <label class="rating-option"><input type="radio" name="javascript" value="3" /><span class="rating-number">3</span></label>
+                <label class="rating-option"><input type="radio" name="javascript" value="4" /><span class="rating-number">4</span></label>
+                <label class="rating-option"><input type="radio" name="javascript" value="5" /><span class="rating-number">5</span></label>
+              </div>
+              <span class="error-message" id="javascript-error" role="alert"></span>
+            </div>
+
+            <div class="form-group rating-group" data-skill="communication">
+              <span class="group-label" id="communication-legend">Communication <span class="required" aria-hidden="true">*</span></span>
+              <div class="rating-options" role="radiogroup" aria-labelledby="communication-legend" aria-describedby="communication-error">
+                <label class="rating-option"><input type="radio" name="communication" value="1" /><span class="rating-number">1</span></label>
+                <label class="rating-option"><input type="radio" name="communication" value="2" /><span class="rating-number">2</span></label>
+                <label class="rating-option"><input type="radio" name="communication" value="3" /><span class="rating-number">3</span></label>
+                <label class="rating-option"><input type="radio" name="communication" value="4" /><span class="rating-number">4</span></label>
+                <label class="rating-option"><input type="radio" name="communication" value="5" /><span class="rating-number">5</span></label>
+              </div>
+              <span class="error-message" id="communication-error" role="alert"></span>
+            </div>
+
+            <div class="form-group rating-group" data-skill="problemSolving">
+              <span class="group-label" id="problemSolving-legend">Problem Solving <span class="required" aria-hidden="true">*</span></span>
+              <div class="rating-options" role="radiogroup" aria-labelledby="problemSolving-legend" aria-describedby="problemSolving-error">
+                <label class="rating-option"><input type="radio" name="problemSolving" value="1" /><span class="rating-number">1</span></label>
+                <label class="rating-option"><input type="radio" name="problemSolving" value="2" /><span class="rating-number">2</span></label>
+                <label class="rating-option"><input type="radio" name="problemSolving" value="3" /><span class="rating-number">3</span></label>
+                <label class="rating-option"><input type="radio" name="problemSolving" value="4" /><span class="rating-number">4</span></label>
+                <label class="rating-option"><input type="radio" name="problemSolving" value="5" /><span class="rating-number">5</span></label>
+              </div>
+              <span class="error-message" id="problemSolving-error" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="portfolio">Portfolio / GitHub URL <span class="optional-tag">(optional)</span></label>
+            <input
+              type="url" id="portfolio" name="portfolio"
+              aria-describedby="portfolio-hint portfolio-error"
+              placeholder="" autocomplete="url" maxlength="200"
+            />
+            <span class="field-hint" id="portfolio-hint">Must start with http:// or https:// if provided.</span>
+            <span class="error-message" id="portfolio-error" role="alert"></span>
+          </div>
+        </fieldset>
+
+        <!-- ===================== STEP 4: REVIEW & SUBMIT ===================== -->
+        <fieldset class="form-step" data-step="4" id="step4" aria-labelledby="step4-legend">
+          <legend id="step4-legend" class="step-legend">
+            <i class="fa-solid fa-list-check" aria-hidden="true"></i> Review &amp; Submit
+          </legend>
+          <p class="step-description">Please review your information carefully before submitting.</p>
+
+          <div class="review-container" id="reviewContainer">
+            <!-- Populated dynamically by renderReview() -->
+          </div>
+
+          <div class="consent-group">
+            <label class="checkbox-option">
+              <input type="checkbox" id="consent" name="consent" aria-describedby="consent-error" />
+              <span>I confirm that the information provided above is accurate to the best of my knowledge. <span class="required" aria-hidden="true">*</span></span>
+            </label>
+            <span class="error-message" id="consent-error" role="alert"></span>
+          </div>
+        </fieldset>
+
+        <!-- ============ FORM-LEVEL SUBMISSION STATUS ============ -->
+        <div class="submission-status" id="submissionStatus" role="alert" aria-live="assertive" hidden></div>
+
+        <!-- ============ NAVIGATION BUTTONS ============ -->
+        <div class="form-nav">
+          <button type="button" class="btn btn-outline" id="prevBtn" disabled>
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Previous
+          </button>
+          <button type="button" class="btn btn-primary" id="nextBtn">
+            Next <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </button>
+          <button type="submit" class="btn btn-success" id="submitBtn" hidden>
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+            <span id="submitBtnText">Submit Application</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- ============ SUCCESS SCREEN ============ -->
+      <div class="result-screen success-screen" id="successScreen" hidden role="alert" aria-live="assertive">
+        <div class="result-icon success-icon" aria-hidden="true">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h2>Application Submitted Successfully!</h2>
+        <p>Thank you for applying to SafeX.</p>
+        <p>Your application has been received successfully. We will review your application and contact you
+          through the email address you provided.</p>
+        <div class="reference-box">
+          <span class="reference-label">Application Reference</span>
+          <span class="reference-value" id="referenceValue">SAFEX-2026-0000</span>
+        </div>
+        <button type="button" class="btn btn-primary" id="backHomeBtn">
+          <i class="fa-solid fa-house" aria-hidden="true"></i> Back to Home
+        </button>
+      </div>
+
+      <!-- ============ DUPLICATE EMAIL SCREEN ============ -->
+      <div class="result-screen duplicate-screen" id="duplicateScreen" hidden role="alert" aria-live="assertive">
+        <div class="result-icon duplicate-icon" aria-hidden="true">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h2>You've Already Applied</h2>
+        <p>You have already submitted an application using this email address.</p>
+        <p>If you believe this is a mistake, please contact <a href="mailto:careers@safex.com">careers@safex.com</a>.</p>
+        <button type="button" class="btn btn-outline" id="duplicateBackBtn">
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Edit My Details
+        </button>
+      </div>
+
+      <!-- ============ SUBMISSION FAILURE SCREEN ============ -->
+      <div class="result-screen error-screen" id="errorScreen" hidden role="alert" aria-live="assertive">
+        <div class="result-icon error-icon" aria-hidden="true">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <h2>Something Went Wrong</h2>
+        <p>We couldn't submit your application. Please check your internet connection and try again.</p>
+        <p class="error-detail" id="errorDetail"></p>
+        <button type="button" class="btn btn-primary" id="retryBtn">
+          <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Try Again
+        </button>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 SafeX. All rights reserved. &middot; This is an internal internship intake system.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
