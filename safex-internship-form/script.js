@@ -24,7 +24,7 @@
   // See README.md → "Google Sheets Setup" for full deployment instructions.
   // Example of a real deployed URL format:
   //   https://script.google.com/macros/s/AKfycbxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/exec
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-wdacokkEI0xYbpy8JubMzX3ILVP3qEJsAV2y9v6HehN7tbdSu4ngV8h04GieqC-H/exec';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGEaBacO2Wc9CL8O1TxRCkF-boFhzfMgXVq4nA93zKILxEChG_KxBAYU_U7jYRPsFm/exec';
 
   const TOTAL_STEPS = 4;
   const STORAGE_KEY = 'safex_internship_application_draft_v1';
@@ -892,17 +892,34 @@
     }
 
     try {
-      await fetch(GOOGLE_SCRIPT_URL, {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload)
       });
 
-      // With mode: 'no-cors', browser submits payload to Apps Script without CORS restriction.
-      submissionSucceeded = true;
-      clearDraftFromStorage();
-      showSuccess(generateReference());
+      let result = null;
+      try {
+        result = await response.json();
+      } catch (parseErr) {
+        // If response couldn't be parsed as JSON, treat HTTP 200 as opaque success fallback
+        if (response.ok) {
+          result = { status: 'success', reference: generateReference() };
+        }
+      }
+
+      resetSubmitButton();
+      setSubmissionStatus('', null);
+
+      if (result && result.status === 'success') {
+        submissionSucceeded = true;
+        clearDraftFromStorage();
+        showSuccess(result.reference || generateReference());
+      } else if (result && result.status === 'duplicate') {
+        showDuplicateScreen();
+      } else {
+        showSubmissionError(result?.message || 'Failed to submit application. Please check your details and try again.');
+      }
     } catch (err) {
       console.error('Submission failed:', err);
       resetSubmitButton();
