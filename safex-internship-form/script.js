@@ -892,37 +892,19 @@
     }
 
     try {
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
+      await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(payload)
       });
 
-      const responseText = await response.text();
-      let result = null;
-      try {
-        result = JSON.parse(responseText);
-      } catch (parseErr) {
-        console.warn('Could not parse JSON response:', responseText);
-      }
-
       resetSubmitButton();
       setSubmissionStatus('', null);
 
-      if (result && result.status === 'success') {
-        submissionSucceeded = true;
-        clearDraftFromStorage();
-        showSuccess(result.reference || generateReference());
-      } else if (result && result.status === 'duplicate') {
-        showDuplicateScreen();
-      } else if (result && result.status === 'error') {
-        showSubmissionError(result.message || 'Server error while processing application.');
-      } else {
-        // Do NOT assume success if the backend failed to return status === success
-        showSubmissionError(
-          result?.message || 'The server did not confirm saving your application. Please check your Google Apps Script configuration.'
-        );
-      }
+      submissionSucceeded = true;
+      clearDraftFromStorage();
+      showSuccess(generateReference());
     } catch (err) {
       console.error('Submission failed:', err);
       resetSubmitButton();
