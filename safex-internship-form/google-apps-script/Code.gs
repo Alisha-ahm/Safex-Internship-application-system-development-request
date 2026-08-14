@@ -217,7 +217,7 @@ function safeTrim(value) {
   return (value === null || value === undefined) ? '' : String(value).trim();
 }
 
-const SPREADSHEET_ID = ''; // Set Google Sheet ID here if using a standalone script (script.google.com)
+const SPREADSHEET_ID = '1cFlfAqwJ4NR47bj727W-WEqP_4naAZyx7T0_vWubNK0'; // Linked Google Sheet ID
 
 function getSheet() {
   let ss = null;
