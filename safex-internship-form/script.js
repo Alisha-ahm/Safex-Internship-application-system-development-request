@@ -24,7 +24,7 @@
   // See README.md → "Google Sheets Setup" for full deployment instructions.
   // Example of a real deployed URL format:
   //   https://script.google.com/macros/s/AKfycbxXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/exec
-  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQpQu-LC9BlACcOd2ikcTifcUrKzhUTtan-HZQi-QjeFr3WodD9aeYrFJwnKm8CZ-D/exec';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzuOhyQMnINWEJpixqZQyA_I_tNOlHfJKEX9-AmNHuXGooYGE24Q7XWZPJ2IG405p85/exec';
 
   const TOTAL_STEPS = 4;
   const STORAGE_KEY = 'safex_internship_application_draft_v1';
