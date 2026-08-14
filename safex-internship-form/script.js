@@ -918,13 +918,10 @@
       } else if (result && result.status === 'error') {
         showSubmissionError(result.message || 'Server error while processing application.');
       } else {
-        if (response.ok && (!responseText || responseText.trim() === '')) {
-          submissionSucceeded = true;
-          clearDraftFromStorage();
-          showSuccess(generateReference());
-        } else {
-          showSubmissionError(result?.message || 'Failed to submit application. Please check your details and try again.');
-        }
+        // Do NOT assume success if the backend failed to return status === success
+        showSubmissionError(
+          result?.message || 'The server did not confirm saving your application. Please check your Google Apps Script configuration.'
+        );
       }
     } catch (err) {
       console.error('Submission failed:', err);
