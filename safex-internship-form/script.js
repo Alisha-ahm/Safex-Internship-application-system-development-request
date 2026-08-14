@@ -898,14 +898,12 @@
         body: JSON.stringify(payload)
       });
 
+      const responseText = await response.text();
       let result = null;
       try {
-        result = await response.json();
+        result = JSON.parse(responseText);
       } catch (parseErr) {
-        // If response couldn't be parsed as JSON, treat HTTP 200 as opaque success fallback
-        if (response.ok) {
-          result = { status: 'success', reference: generateReference() };
-        }
+        console.warn('Could not parse JSON response:', responseText);
       }
 
       resetSubmitButton();
@@ -917,8 +915,16 @@
         showSuccess(result.reference || generateReference());
       } else if (result && result.status === 'duplicate') {
         showDuplicateScreen();
+      } else if (result && result.status === 'error') {
+        showSubmissionError(result.message || 'Server error while processing application.');
       } else {
-        showSubmissionError(result?.message || 'Failed to submit application. Please check your details and try again.');
+        if (response.ok && (!responseText || responseText.trim() === '')) {
+          submissionSucceeded = true;
+          clearDraftFromStorage();
+          showSuccess(generateReference());
+        } else {
+          showSubmissionError(result?.message || 'Failed to submit application. Please check your details and try again.');
+        }
       }
     } catch (err) {
       console.error('Submission failed:', err);

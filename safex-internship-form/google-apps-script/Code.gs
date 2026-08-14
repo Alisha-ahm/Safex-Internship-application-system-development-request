@@ -98,10 +98,10 @@ function doPost(e) {
       reference: reference
     });
   } catch (err) {
-    // Never let an uncaught exception leak stack traces to the client.
+    // Return explicit error message for easier debugging
     return jsonResponse({
       status: 'error',
-      message: 'Server error while processing the application. Please try again later.'
+      message: 'Server error: ' + (err && err.message ? err.message : String(err))
     });
   }
 }
@@ -217,11 +217,24 @@ function safeTrim(value) {
   return (value === null || value === undefined) ? '' : String(value).trim();
 }
 
-// ---------------------------------------------------------------------
-// SPREADSHEET HELPERS
-// ---------------------------------------------------------------------
+const SPREADSHEET_ID = ''; // Set Google Sheet ID here if using a standalone script (script.google.com)
+
 function getSheet() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let ss = null;
+  try {
+    ss = SpreadsheetApp.getActiveSpreadsheet();
+  } catch (e) {}
+
+  if (!ss && SPREADSHEET_ID) {
+    try {
+      ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    } catch (e) {}
+  }
+
+  if (!ss) {
+    throw new Error('Spreadsheet not linked. Make sure to open your Google Sheet -> Extensions -> Apps Script and deploy from there, or set SPREADSHEET_ID in Code.gs.');
+  }
+
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
